@@ -16,6 +16,7 @@ public final class VOptional extends Validator<String, String> {
 		super(null);
 	}
 
+
 	@Override
 	public VResult<String> validate(String in) {
 		return success(in != null && in.isEmpty() ? null : in);
@@ -34,7 +35,6 @@ public final class VOptional extends Validator<String, String> {
 		@Override
 		public VResult<Out2> validate(String in) {
 			var r1 = VOptional.this.validate(in);
-
 			return r1.out() != null
 					? v2.validate((In2)r1.out())
 					: new VResult<>(null, null);

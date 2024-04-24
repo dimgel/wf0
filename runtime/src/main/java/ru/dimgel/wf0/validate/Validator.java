@@ -40,7 +40,6 @@ public abstract class Validator<In, Out> {
 		@Override
 		public VResult<Out2> validate(In in) {
 			var r1 = Validator.this.validate(in);
-
 			return r1.ok()
 					? v2.validate((In2)r1.out())
 					: new VResult<>(null, r1.errorMessage());

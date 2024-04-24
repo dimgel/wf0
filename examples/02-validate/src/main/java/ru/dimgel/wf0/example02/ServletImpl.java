@@ -5,10 +5,9 @@ import ru.dimgel.wf0.dispatch.Servlet;
 
 
 public class ServletImpl extends Servlet {
-	private final Dispatcher dispatcher = new DispatcherImpl();
 
 	@Override
 	protected Dispatcher createDispatcher() {
-		return dispatcher;
+		return new DispatcherImpl();
 	}
 }

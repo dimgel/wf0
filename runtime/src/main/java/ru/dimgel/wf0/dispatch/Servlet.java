@@ -8,8 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 
 public abstract class Servlet extends HttpServlet {
-	Dispatcher dispatcher;
+	private Dispatcher dispatcher;
 
+	/**
+	 * Called once by {@link #init(ServletConfig)}, returned object is cached.
+	 */
 	protected abstract Dispatcher createDispatcher();
 
 	@Override

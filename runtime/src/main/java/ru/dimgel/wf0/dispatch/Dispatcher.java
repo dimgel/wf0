@@ -1,9 +1,12 @@
 package ru.dimgel.wf0.dispatch;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 
 
+/**
+ * <b>ATTENTION</b>: Single instance is created & cached by {@link Servlet} and used for all requests,
+ * so implementations must be stateless & thread-safe.
+ */
 public abstract class Dispatcher {
 
 	/**
