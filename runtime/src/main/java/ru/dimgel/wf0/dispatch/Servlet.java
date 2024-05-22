@@ -36,27 +36,30 @@ public abstract class Servlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest rq, HttpServletResponse re) {
+		var m = RequestMethod.fromString(rq.getMethod());
 		try {
-			var p = dispatcher.createPage(rq);
+			var p = dispatcher.createPage(rq, m);
 			p.request = rq;
 			p.response = re;
+			p.method = m;
 			p.service();
 			re.flushBuffer();
 		} catch (WebError e) {
 			var msg = (e.httpStatus == 500) ? logInternalServerError(e) : e.getMessage();
-			sendError(rq, re, e.httpStatus, msg);
+			sendError(rq, re, m, e.httpStatus, msg);
 		} catch (Throwable e) {
 			var msg = logInternalServerError(e);
-			sendError(rq, re, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, msg);
+			sendError(rq, re, m, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, msg);
 		}
 	}
 
 
-	protected void sendError(HttpServletRequest rq, HttpServletResponse re, int httpStatus, String errorMessage) {
+	protected void sendError(HttpServletRequest rq, HttpServletResponse re, RequestMethod m, int httpStatus, String errorMessage) {
 		try {
 			var p = dispatcher.createErrorPage(rq, httpStatus, errorMessage);
 			p.request = rq;
 			p.response = re;
+			p.method = m;
 			p.service();
 			re.flushBuffer();
 		} catch (Throwable _) {

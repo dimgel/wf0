@@ -16,6 +16,10 @@ public abstract class Page {
 	protected HttpServletRequest request;
 	protected HttpServletResponse response;
 
+	// Filled by Servlet.
+	// This will likely to be used by Dispatcher, so I already have it parsed.
+	protected RequestMethod method;
+
 	// Called by Servlet.
 	protected abstract void service() throws Exception;
 }

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import ru.dimgel.wf0.dispatch.Dispatcher;
 import ru.dimgel.wf0.dispatch.DispatcherUtil;
 import ru.dimgel.wf0.dispatch.Page;
+import ru.dimgel.wf0.dispatch.RequestMethod;
 import ru.dimgel.wf0.example01.page.HelloPage;
 import ru.dimgel.wf0.example01.page.HomePage;
 
@@ -11,7 +12,8 @@ import ru.dimgel.wf0.example01.page.HomePage;
 public class DispatcherImpl extends Dispatcher {
 
 	@Override
-	public Page createPage(HttpServletRequest rq) {
+	public Page createPage(HttpServletRequest rq, RequestMethod m) {
+
 		// You can parse request URI and map it to Page subclass any way you like; e.g. in example02 I use regular expression.
 		// But here I demonstrate splitRequestPath() utility which returns ArrayList of path components; e.g. "/hello/world" ---> ["hello", "world"].
 		// It's rather verbose but very flexible to iterate over and extract path-encoded parameters.

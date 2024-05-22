@@ -1,6 +1,7 @@
 package ru.dimgel.wf0.example01.page;
 
 import ru.dimgel.wf0.dispatch.Page;
+import ru.dimgel.wf0.dispatch.RequestMethod;
 
 
 public class HelloPage extends Page {
