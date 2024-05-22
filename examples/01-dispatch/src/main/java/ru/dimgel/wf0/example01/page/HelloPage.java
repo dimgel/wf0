@@ -1,10 +1,11 @@
 package ru.dimgel.wf0.example01.page;
 
-import ru.dimgel.wf0.dispatch.Page;
-import ru.dimgel.wf0.dispatch.RequestMethod;
+import ru.dimgel.wf0.example01.MyPage;
 
 
-public class HelloPage extends Page {
+// Instead of extending wf0's class Page and overriding Page.service() method,
+// this class extends user's custom class MyPage (which introduces instance variable `userAgent`) and overrides MyPage.myService().
+public class HelloPage extends MyPage {
 	String name;
 
 	public HelloPage(String name) {
@@ -12,10 +13,10 @@ public class HelloPage extends Page {
 	}
 
 	@Override
-	protected void service() throws Exception {
+	protected void myService() throws Exception {
 		response.setContentType("text/plain; charset=UTF-8");
 		try (var w = response.getWriter()) {
-			w.format("Hello %s!\n", name);
+			w.format("Hello %s!\n\nYour User-Agent is: \"%s\"", name, userAgent);
 		}
 	}
 }
