@@ -11,7 +11,7 @@ Actually, after 4 years in C++, here I was just recalling my Java reflexes by co
 
 2. Remove magic: e.g. use a little more verbose but straightforward `void f() { inTransaction(_ -> {...}); }` instead of magically processed `@Transactional void f() {...}`, etc.
 
-3. Do as much as possible at buildtime: no runtime-processed annotations, no runtime-generated proxies, etc. E.g. if you DO need annotations, make sure they are processed at buildtime -- e.g. like lombok does.
+3. Do as much as possible at buildtime: no runtime-processed annotations, no runtime-generated proxies, etc. E.g. if you DO need annotations, make sure they are processed at buildtime -- like lombok does.
 
 4. Particularly, static strict typization is ultimately good -- because it's checked at buildtime (and provides for efficient runtime, too).
 
@@ -20,7 +20,7 @@ Actually, after 4 years in C++, here I was just recalling my Java reflexes by co
 
 For each component listed below:
 
-1. Read short annotation below;
+1. Read annotation below;
 2. Study example;
 3. (Optionally) study sources.
 
@@ -35,9 +35,9 @@ This one should be learned first, because it's the simplest one and is used in a
 
 For many years, every now and then I tried to create a good web framework. In the end I LOL'd, realizing that each attempt brought me closer and closer to just mimicking Servlet API -- which turned out to be pretty perfect by itself, except a couple of things that I "fixed":
 
-1. `<servlet>` and `<servlet-mapping>` in `web.xml` are too verbose and ugly for intensive use. So I introduced classes `Page` and `Dispatcher`. You inherit your request handlers from `Page` instead of `Servlet`, and inherit from `Dispatcher` to map request URIs to your `Page` instances with Java code instead of `web.xml`. No annotated POJOs (i.e. no magic), all extension points are explicitly exposed as virtual methods. E.g. in Spring, your entry points are annotated methods, and there can be multiple entry points per class; in fw0, each entry point is separate `Page` subclass overriding pure virtual `Page.service()`.
+1. `<servlet>` and `<servlet-mapping>` in `web.xml` are too verbose and ugly for intensive use. So I introduced classes `Page` and `Dispatcher`. You inherit your request handlers from `Page` instead of `Servlet`, and inherit from `Dispatcher` to map request URIs to your `Page` instances with Java code instead of `web.xml`. No annotated POJOs (i.e. no magic), all extension points are explicitly exposed as virtual methods. E.g. in Spring, your entry points are annotated methods, and there can be multiple entry points per class; in fw0, each entry point is separate `Page` subclass overriding pure virtual `Page.service()`. So while in Spring you might map URL `/a/b/c` to `a.B.c()` (package `a`, class `B`, method `c`), in wf0 you map it to `a.b.C.service()` (package `a.b`, class `C`).
 
-2. `Page` instances are stateful and temporary, a new instance is created by `Dispatcher` for each HTTP request. To my taste, ability to pass state around in instance vars instead of method parameters is a convenience. The very first such instance vars are `request` and `response`; users can add more, e.g. by declaring common superclass `MyPage extends Page { more vars }` for all their pages.
+2. `Page` instances are stateful and temporary, a new instance is created by `Dispatcher` for each HTTP request. To my taste, ability to pass state around in instance vars instead of method parameters is a convenience. The very first such instance vars are `request` and `response`; users can add more by declaring common superclass `MyPage extends Page { more vars }` for all their pages.
 
 So this component is pretty tiny and follows "be close to basic technology" principle, where "basic technology" is Servlet API.
 
