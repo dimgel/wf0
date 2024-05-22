@@ -9,7 +9,7 @@ Actually, after 4 years in C++, here I was just recalling my Java reflexes by co
 
 1. Be as close as possible to basic technology: no stateful web frameworks over stateless HTTP, no heavy ORMs over SQL databases, no pure functional programming over imperative I/O, etc. All these "no-things" are "paradigm mismatch bridges" -- a wide subclass of "leaky abstractions".
 
-2. Remove magic: e.g. use a little more verbose but straightforward `void f() { inTransaction(_ -> {...}); }` instead of magically processed `@Transactional void f() {...}`, etc. This is also more flexible: your `f()` may contain some code outside transaction block, or multiple transaction blocks, etc.; i.e. **it does not enforce your programming model**. (And some argue that Spring is non-intrisive...)
+2. Remove magic: e.g. use a little more verbose but straightforward `void f() { inTransaction(_ -> {...}); }` instead of magically processed `@Transactional void f() {...}`, etc. This is also more flexible: your `f()` may contain some code outside transaction block, or multiple transaction blocks, etc. -- i.e. **it does not enforce your programming model**. (And some argue that Spring is non-intrisive...)
 
 3. Do as much as possible at buildtime: no runtime-processed annotations, no runtime-generated proxies, etc. E.g. if you DO need annotations, make sure they are processed at buildtime -- like lombok does.
 
