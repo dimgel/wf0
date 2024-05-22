@@ -17,7 +17,7 @@ public abstract class Page {
 	protected HttpServletResponse response;
 
 	// Filled by Servlet.
-	// This will likely to be used by Dispatcher, so I already have it parsed.
+	// This will likely be used by Dispatcher, so I already have it parsed.
 	protected RequestMethod method;
 
 	// Called by Servlet.
