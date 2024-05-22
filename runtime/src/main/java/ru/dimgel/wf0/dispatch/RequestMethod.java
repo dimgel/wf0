@@ -52,6 +52,7 @@ public enum RequestMethod {
 			case "HEAD" -> HEAD;
 			case "CONNECT" -> CONNECT;
 			case "TRACE" -> TRACE;
+			case "OPTIONS" -> OPTIONS;
 			default -> UNKNOWN;
 		};
 	}
