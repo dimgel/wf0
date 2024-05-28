@@ -25,7 +25,7 @@ public class DispatcherImpl extends Dispatcher {
 		}
 
 		var s = i.next();
-		if (s.equals("hello")) {
+		if ("hello".equals(s)) {
 			if (!i.hasNext()) {
 				return new HelloPage("stranger");
 			}
