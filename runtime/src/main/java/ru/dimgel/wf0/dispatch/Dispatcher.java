@@ -18,4 +18,8 @@ public abstract class Dispatcher {
 	public Page createErrorPage(HttpServletRequest rq, int httpStatus, String errorMessage) {
 		return new DefaultErrorPage(httpStatus, errorMessage);
 	}
+
+	public Page createErrorPage(HttpServletRequest rq, int httpStatus) {
+		return new DefaultErrorPage(httpStatus, null);
+	}
 }

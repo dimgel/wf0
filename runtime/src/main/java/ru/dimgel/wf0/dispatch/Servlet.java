@@ -39,6 +39,9 @@ public abstract class Servlet extends HttpServlet {
 		var m = RequestMethod.fromString(rq.getMethod());
 		try {
 			var p = dispatcher.createPage(rq, m);
+			if (p == null) {
+				p = dispatcher.createErrorPage(rq, 404);
+			}
 			p.request = rq;
 			p.response = re;
 			p.method = m;
